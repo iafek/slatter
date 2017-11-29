@@ -9,8 +9,8 @@ if __name__ == "__main__":
 
 	fetcher = ChatterFetcher()
 	fetcher.login()
-	qr = fetcher.queryChatter()
-	posts = fetcher.parse_query_result(qr)
+	posts = fetcher.queryChatter()
+	# posts = fetcher.parse_query_result(qr)
 
 	poster = SlackPoster()
 	for message in posts:

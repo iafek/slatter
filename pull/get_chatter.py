@@ -26,9 +26,15 @@ class ChatterFetcher:
 
 	def queryChatter(self):
 		print "\nqueryChatter"
-		qr = svc.query("select Body from CollaborationGroupFeed where ParentId=\'0F91I000000MdhESAS\'")
-		return qr
+		postsqr = svc.query("select CreatedById, Body from CollaborationGroupFeed where ParentId=\'0F91I000000MdhESAS\'")
+                posts = []
+                for rec in postsqr[sf.records:]:
+                    posterqr = svc.query("select name from user where id = '" + str(rec[2]) + "'")
+                    posts.append("Posted by : " + str(posterqr[sf.records:][0]) + " " + str(rec[3]))       
+                    print ("Posted by : " + str(posterqr[sf.records:][0]) + " " + str(rec[3]))
+		return posts
 
+"""
 	def dumpQueryResult(self, qr):
 		print "query size = " + str(qr[sf.size])
 
@@ -40,18 +46,7 @@ class ChatterFetcher:
 			qr = svc.queryMore(str(qr[sf.queryLocator]))
 			for rec in qr[sf.records:]:
 				print str(rec[0]) + " : " + str(rec[1]) + " : " + str(rec[2])
-
-	def parse_query_result(self, qr):
-		posts = []
-		for rec in qr[sf.records:]:
-			posts.append(str(rec[2]))
-
-		if str(qr[sf.done]) == 'false':
-			qr = svc.queryMore(str(qr[sf.queryLocator]))
-			for rec in qr[sf.records:]:
-				posts.append(str(rec[2]))
-
-		return posts
+"""
 
 
 if __name__ == "__main__":
