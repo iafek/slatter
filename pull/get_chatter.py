@@ -2,21 +2,22 @@
 
 import sys
 
-from pull import beatbox
+from beatbox._beatbox import (Client, _tPartnerNS)
 
-sf = beatbox._tPartnerNS
-svc = beatbox.Client()
-beatbox.gzipRequest=False
+sf = _tPartnerNS
+svc = Client()
+gzipRequest = False
 
 
 class ChatterFetcher:
 	def __init__(self):
-		self.servel_url = 'https://na73.salesforce.com/services/Soap/u/40.0'
+		self.server_url = 'https://na73.salesforce.com/services/Soap/u/40.0'
 		self.username = 'slatter@ofekhackathon.org'
 		self.password = 'test1234'
 
 	def login(self):
-		login_result = svc.login(self.username, self.password, serverUrl=self.server_url)
+		svc.serverUrl = self.server_url
+		login_result = svc.login(self.username, self.password)
 		print "sid = " + str(login_result[sf.sessionId])
 		print "welcome " + str(login_result[sf.userInfo][sf.userFullName])
 	
