@@ -1,7 +1,7 @@
 # demonstration of using the BeatBox library to call the sforce API
 
 import sys
-
+import re
 from beatbox._beatbox import (Client, _tPartnerNS)
 
 sf = _tPartnerNS
@@ -30,8 +30,8 @@ class ChatterFetcher:
                 posts = []
                 for rec in postsqr[sf.records:]:
                     posterqr = svc.query("select name from user where id = '" + str(rec[2]) + "'")
-                    posts.append("Posted by : " + str(posterqr[sf.records:][0]) + " " + str(rec[3]))       
-                    print ("Posted by : " + str(posterqr[sf.records:][0]) + " " + str(rec[3]))
+                    posts.append("Posted by : " + str(posterqr[sf.records:][0]) + " " + re.sub('<[^<]+>', "", str(rec[2])))
+                    print ("Posted by : " + str(posterqr[sf.records:][0]) + " " + re.sub('<[^<]+>', "", str(rec[2])))
 		return posts
 
 """
