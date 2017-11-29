@@ -1,7 +1,7 @@
 # demonstration of using the BeatBox library to call the sforce API
 
 import sys
-
+import re
 from beatbox._beatbox import (Client, _tPartnerNS)
 
 sf = _tPartnerNS
@@ -44,7 +44,7 @@ class ChatterFetcher:
 	def parse_query_result(self, qr):
 		posts = []
 		for rec in qr[sf.records:]:
-			posts.append(str(rec[2]))
+			posts.append(re.sub('<[^<]+>', "", str(rec[2])))
 
 		if str(qr[sf.done]) == 'false':
 			qr = svc.queryMore(str(qr[sf.queryLocator]))
