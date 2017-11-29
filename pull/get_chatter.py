@@ -20,21 +20,21 @@ class ChatterFetcher:
 		login_result = svc.login(self.username, self.password)
 		print "sid = " + str(login_result[sf.sessionId])
 		print "welcome " + str(login_result[sf.userInfo][sf.userFullName])
-	
+
 	def getServerTimestamp(self):
 		print "\ngetServerTimestamp " + svc.getServerTimestamp()
-			
-        def queryChatter(self):
-                print "\nqueryChatter"
-                qr = svc.query("select Body from CollaborationGroupFeed")
-                self.dumpQueryResult(qr)
+
+	def queryChatter(self):
+		print "\nqueryChatter"
+		qr = svc.query("select Body from CollaborationGroupFeed")
+		self.dumpQueryResult(qr)
 
 	def dumpQueryResult(self, qr):
 		print "query size = " + str(qr[sf.size])
-	
+
 		for rec in qr[sf.records:]:
 			print str(rec[0]) + " : " + str(rec[1]) + " : " + str(rec[2])
-	
+
 		if (str(qr[sf.done]) == 'false'):
 			print "\nqueryMore"
 			qr = svc.queryMore(str(qr[sf.queryLocator]))
@@ -49,4 +49,4 @@ if __name__ == "__main__":
 	else:
 		fetcher = ChatterFetcher()
 		fetcher.login()
-                fetcher.queryChatter()
+		fetcher.queryChatter()
