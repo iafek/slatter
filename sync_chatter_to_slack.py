@@ -15,5 +15,6 @@ if __name__ == "__main__":
 	poster = SlackPoster()
 	for message in posts:
 		if message and message != "":
+			print (message)
 			poster.post(message)
-
+			print ("Done")

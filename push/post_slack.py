@@ -13,7 +13,7 @@ class SlackPoster(object):
 		slack_data = message
 
 		response = requests.post(
-			self.webhook_url, data=slack_data,
+			self.webhook_url, data=json.dumps(json.loads(slack_data)),
 			headers={'Content-Type': 'application/json'}
 		)
 
