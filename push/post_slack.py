@@ -6,8 +6,7 @@ import requests
 class SlackPoster(object):
 
 	def __init__(self):
-#		self.webhook_url = 'https://hooks.slack.com/services/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'
-                self.webhook_url = 'https://hooks.slack.com/services/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'
+		self.webhook_url = 'https://hooks.slack.com/services/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'
 
 	def post(self, message):
 
