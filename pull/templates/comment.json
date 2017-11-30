@@ -2,11 +2,11 @@
    "attachments": [
        {
            "text": "{{ body }}",
-           "title": "Comment from {{ name }}",
-           "title_link": "https://na73.lightning.force.com/one/one.app#/sObject/0F91I000000MdhESAS/view",
-           "ts": "{{ ts }}",
+           "title": "\tComment from {{ name }}",
+           "title_link": "https://na73.lightning.force.com/one/one.app#/sObject/0F91I000000Men9SAC/view",
+           "ts": "\t{{ ts }}",
            "color": "#820000",
-           "footer": "Einstein Memes group",
+           "footer": "Ofek Collaboration group",
            "footer_icon": "https://c.na73.content.force.com/profilephoto/7291I000000CiIR/F"
 
        }
