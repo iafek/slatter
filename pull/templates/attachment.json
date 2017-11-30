@@ -4,18 +4,18 @@
            "text": "{{ body }}",
            "title": "New Post from {{ name }}",
            "title_link": "https://na73.lightning.force.com/one/one.app#/sObject/0F91I000000MdhESAS/view",
-           "ts": 1511998510999,
+           "ts": "{{ ts }}",
            "color": "#01a3d6 ",
            "footer": "Einstein Memes group",
-           "footer_icon": "https://c.na73.content.force.com/profilephoto/7291I000000CiIR/F",
-           "actions": [
-               {
-                   "name": "like",
-                   "text": "Like",
-                   "type": "button",
-                   "value": "like"
-               }
-           ]
+           "footer_icon": "https://c.na73.content.force.com/profilephoto/7291I000000CiIR/F"
+//           "actions": [
+//               {
+//                   "name": "like",
+//                   "text": "Like",
+//                   "type": "button",
+//                   "value": "like"
+//               }
+//           ]
        }
    ]
 }

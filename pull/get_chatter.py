@@ -4,6 +4,7 @@ import sys
 import re
 from beatbox._beatbox import (Client, _tPartnerNS)
 from jinja2 import Environment, PackageLoader, select_autoescape
+from datetime import datetime, timedelta
 env = Environment(
     loader=PackageLoader('pull', 'templates'),
     autoescape=select_autoescape(['html', 'xml', 'json'])
@@ -31,17 +32,16 @@ class ChatterFetcher:
     def queryChatter(self):
         print "\nqueryChatter"
         template = env.get_template("attachment.json")
-        postsqr = svc.query("select CreatedById, Body from CollaborationGroupFeed where ParentId=\'0F91I000000MdhESAS\'"
+        postsqr = svc.query("select CreatedById, Body, CreatedDate "
+                            "from CollaborationGroupFeed where ParentId=\'0F91I000000MdhESAS\'"
                             "AND Type = 'TextPost' order by LastModifiedDate")
         posts = []
         for rec in postsqr[sf.records:]:
             posterqr = svc.query("select name from user where id = '" + str(rec[2]) + "'")
-            msg1 = "".join(str(rec[3]).split("\n"))
-            msg = re.sub('<[^<]+>', "", msg1 )
-            if  msg:
-                posts.append(template.render(name=str(posterqr[sf.records:][0]), body = msg))
-
-                # posts.append("Posted by : " + str(posterqr[sf.records:][0]) + " " + msg)
+            msg = re.sub('<[^<]+>', "", "".join(str(rec[3]).split("\n")))
+            ts = (datetime.strptime(str(rec[4])[:-5], '%Y-%m-%dT%H:%M:%S') - timedelta(hours=10)).strftime('%s')
+            if msg:
+                posts.append(template.render(name=str(posterqr[sf.records:][0]), body=msg, ts=ts))
         return posts
 
     def parse_query_result(self, qr):
